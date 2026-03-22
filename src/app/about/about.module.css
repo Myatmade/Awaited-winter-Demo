@@ -1,0 +1,50 @@
+.page {
+  min-height: calc(100dvh - 126px);
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  width: min(980px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.shield {
+  width: min(760px, 100%);
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+
+  padding: 34px 28px 28px;
+  text-align: center;
+
+  clip-path: polygon(6% 10%, 50% 0%, 94% 10%, 94% 90%, 50% 100%, 6% 90%);
+}
+
+.title {
+  font-family: var(--font-macondo), serif;
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.body {
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: #071c3f;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.bottomLogo {
+  display: block;
+  width: min(420px, 90%);
+  height: auto;
+  margin: 24px auto 0;
+}

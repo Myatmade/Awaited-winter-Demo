@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-oxanium), sans-serif;
+
+  background: #cfe0f2 url("/images/demo/bg/Bg.jpg") center / cover no-repeat
+    fixed;
+  color: #071c3f;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-oxanium), sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-oxanium), sans-serif;
+}
+
+main {
+  flex: 1;
+}

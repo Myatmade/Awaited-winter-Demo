@@ -1,0 +1,12 @@
+.footer {
+  height: 56px;
+  display: grid;
+  place-items: center;
+
+  background: #071c3f;
+  color: #cfe3ff;
+  font-family: var(--font-macondo), serif;
+
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}

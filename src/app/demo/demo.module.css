@@ -1,0 +1,292 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  background: #050811;
+  color: #f8f5f1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sceneArea {
+  position: relative;
+  min-height: 62vh;
+  width: 100%;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sceneArea::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255, 244, 214, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(
+      to top,
+      rgba(8, 10, 16, 0.8),
+      rgba(8, 10, 16, 0.2) 45%,
+      rgba(8, 10, 16, 0.45)
+    );
+  pointer-events: none;
+}
+
+.topBar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 20px 24px 0;
+}
+
+.topControls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ghostButton,
+.smallButton,
+.nextButton,
+.choiceButton {
+  border: 0;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    background 0.18s ease;
+}
+
+.ghostButton {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.ghostButton:hover,
+.smallButton:hover,
+.nextButton:hover,
+.choiceButton:hover {
+  transform: translateY(-1px);
+}
+
+.stage {
+  position: relative;
+  z-index: 2;
+  height: calc(62vh - 120px);
+}
+
+.character {
+  position: absolute;
+  bottom: 0;
+  width: min(28vw, 420px);
+  aspect-ratio: 3 / 5;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.45));
+  animation: fadeInCharacter 0.45s ease;
+}
+
+.characterImage {
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.characterShadow {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 12px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.38);
+  filter: blur(16px);
+  z-index: -1;
+}
+
+.leftCharacter {
+  left: 12%;
+  width: min(48vw, 620px);
+  bottom: -300px;
+}
+
+.rightCharacter {
+  right: 12%;
+  width: min(48vw, 620px);
+  bottom: -260px;
+}
+
+.bigCenterCharacter {
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(48vw, 620px);
+  bottom: -260px;
+}
+
+.weakPose {
+  transform: translateY(14px);
+  opacity: 0.92;
+}
+
+.sadPose {
+  filter: brightness(0.92) drop-shadow(0 18px 28px rgba(0, 0, 0, 0.52));
+}
+
+.dialogueArea {
+  width: 100%;
+  background: #050811;
+  padding: 20px 24px 18px;
+}
+
+.dialogueBox,
+.choicePanel {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 16px 18px 14px;
+  border-radius: 24px;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 12, 20, 0.96),
+    rgba(6, 8, 15, 0.98)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
+.dialogueHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.speaker {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffe7c4;
+}
+
+.dialogueText {
+  margin: 0;
+  min-height: 56px;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.75;
+  color: rgba(255, 250, 244, 0.96);
+  white-space: pre-wrap;
+}
+
+.narrationText {
+  color: rgba(247, 243, 236, 0.96);
+}
+
+.thoughtText {
+  font-style: italic;
+  color: #eadcff;
+}
+
+.bottomControls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.smallButton {
+  min-width: 92px;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.smallButton:disabled,
+.nextButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.nextButton {
+  min-width: 120px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-weight: 700;
+}
+
+.nextButton:hover,
+.smallButton:hover,
+.ghostButton:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.choicePrompt {
+  margin: 0 0 14px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #ffe7c4;
+}
+
+.choiceButtons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.choiceButton {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 18px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.choiceButton:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.roomValentina {
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(200vw, 620px);
+  bottom: -300px;
+}
+
+.character,
+.characterImage {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes fadeInCharacter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

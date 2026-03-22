@@ -1,0 +1,206 @@
+.page {
+  padding: 40px 0 80px;
+}
+
+/* ===== Top section (cards) ===== */
+.topPanel {
+  width: min(980px, calc(100% - 48px));
+  margin: 0 auto;
+  /* background: #bcd3eb; */
+  padding: 28px;
+  border-radius: 6px;
+}
+
+.title {
+  font-family: var(--font-macondo), serif;
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 22px;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+/* 071c3f */
+/* cfe3ff */
+.card {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 22px;
+  color: #071c3f;
+  display: grid;
+  gap: 14px;
+  clip-path: polygon(2% 4%, 50% 0%, 98% 4%, 98% 94%, 50% 100%, 2% 94%);
+  overflow: hidden;
+}
+/* bcd3eb */
+.cardPortrait {
+  position: relative;
+  height: 170px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cardPortraitInner {
+  position: absolute;
+  inset: 0;
+}
+
+.cardPortraitImg {
+  object-fit: contain;
+  object-position: center top;
+}
+
+.valentinaThumb {
+  transform: scale(3.5) translateY(-4px);
+  transform-origin: center top;
+}
+
+.aliceThumb {
+  transform: scale(2.5) translateY(-12px) translateX(7px);
+  transform-origin: center top;
+}
+
+.noahThumb {
+  transform: scale(3.3) translateY(-8px);
+  transform-origin: center top;
+}
+
+.cardPortraitFallback {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.cardText {
+  text-align: center;
+  display: grid;
+  gap: 6px;
+}
+
+.cardName {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.cardRole {
+  opacity: 0.9;
+}
+
+.moreBtn {
+  margin: 6px auto 0;
+  background: transparent;
+  border: none;
+  color: #071c3f;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.moreBtn:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* ===== Bottom section (viewer) ===== */
+.bottomPanel {
+  width: min(980px, calc(100% - 48px));
+  margin: 28px auto 0;
+  padding: 40px 28px;
+  border-radius: 6px;
+}
+
+.viewer {
+  display: grid;
+  grid-template-columns: 64px 1fr 1.2fr 64px;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrowBtn {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  border: 1px solid rgba(7, 28, 63, 0.45);
+  background: rgba(255, 255, 255, 0.5);
+  color: #071c3f;
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.arrowBtn:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.portraitStage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+}
+
+.portraitFigure {
+  position: relative;
+  width: 420px;
+  height: 520px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portraitImg {
+  object-fit: contain;
+  object-position: center center;
+  transform: scale(1.12);
+}
+
+/* simple fallback silhouette */
+.silhouette {
+  position: relative;
+  width: 140px;
+  height: 260px;
+  border-radius: 70px;
+  background: rgba(7, 28, 63, 0.45);
+  z-index: 1;
+}
+
+/* Info card */
+.infoCard {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(7, 28, 63, 0.35);
+  border-radius: 16px;
+  padding: 26px 24px;
+  color: #071c3f;
+  min-height: 260px;
+}
+
+.infoName {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.infoTagline {
+  opacity: 0.95;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.infoMeta {
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+.metaLabel {
+  font-weight: 700;
+}
