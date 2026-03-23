@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider";
 import styles from "./characters.module.css";
 
 type Character = {
@@ -14,37 +15,28 @@ type Character = {
 };
 
 export default function CharactersPage() {
-  const characters = useMemo<Character[]>(
-    () => [
-      {
-        id: "valentina",
-        name: "Valentina Evans",
-        role: "Protagonist",
-        tagline: "A quiet girl carrying memories she cannot forget.",
-        profile:
-          "A thoughtful young woman living in a small town. She finds comfort in simple moments, even as fragments of the past surface in unexpected ways.",
-        portraitSrc: "/images/demo/characters/Valentina_normal.png",
-      },
-      {
-        id: "alice",
-        name: "Alice",
-        role: "Companion",
-        tagline: "A small presence with an irreplaceable warmth.",
-        profile:
-          "A lively white dog who brings light into Valentina’s daily life. Her gentle loyalty forms an unspoken bond that words cannot express.",
-        portraitSrc: "/images/demo/characters/Alice_normal.png",
-      },
-      {
-        id: "noah",
-        name: "Noah",
-        role: "???",
-        tagline: "A familiar face wrapped in forgotten time.",
-        profile:
-          "A gentle young man who appears briefly in Valentina’s memories. His presence evokes emotions that even she struggles to understand.",
-        portraitSrc: "/images/demo/characters/Noah_normal.png",
-      },
-    ],
-    [],
+  const { content } = useLanguage();
+
+  const characters = useMemo(
+    () =>
+      [
+        {
+          id: "valentina",
+          ...content.characters.items.valentina,
+          portraitSrc: "/images/demo/characters/Valentina_normal.png",
+        },
+        {
+          id: "alice",
+          ...content.characters.items.alice,
+          portraitSrc: "/images/demo/characters/Alice_normal.png",
+        },
+        {
+          id: "noah",
+          ...content.characters.items.noah,
+          portraitSrc: "/images/demo/characters/Noah_normal.png",
+        },
+      ] satisfies Character[],
+    [content],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -69,7 +61,7 @@ export default function CharactersPage() {
   return (
     <div className={styles.page}>
       <section className={styles.topPanel}>
-        <h1 className={styles.title}>Characters</h1>
+        <h1 className={styles.title}>{content.characters.title}</h1>
 
         <div className={styles.cardRow}>
           {characters.map((c) => (
@@ -107,7 +99,7 @@ export default function CharactersPage() {
                   onClick={() => openFromCard(c.id)}
                   type="button"
                 >
-                  [More]
+                  {content.characters.more}
                 </button>
               </div>
             </article>
@@ -121,7 +113,7 @@ export default function CharactersPage() {
             className={styles.arrowBtn}
             onClick={goPrev}
             type="button"
-            aria-label="Previous character"
+            aria-label={content.characters.previousCharacter}
           >
             ‹
           </button>
@@ -148,11 +140,16 @@ export default function CharactersPage() {
             <div className={styles.infoTagline}>{active.tagline}</div>
 
             <div className={styles.infoMeta}>
-              <span className={styles.metaLabel}>Role:</span> {active.role}
+              <span className={styles.metaLabel}>
+                {content.characters.roleLabel}
+              </span>{" "}
+              {active.role}
             </div>
 
             <div className={styles.infoMeta}>
-              <span className={styles.metaLabel}>Short Profile:</span>{" "}
+              <span className={styles.metaLabel}>
+                {content.characters.profileLabel}
+              </span>{" "}
               {active.profile}
             </div>
           </div>
@@ -161,7 +158,7 @@ export default function CharactersPage() {
             className={styles.arrowBtn}
             onClick={goNext}
             type="button"
-            aria-label="Next character"
+            aria-label={content.characters.nextCharacter}
           >
             ›
           </button>

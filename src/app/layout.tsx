@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { Macondo, Oxanium } from "next/font/google";
 
 const macondo = Macondo({
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${macondo.variable} ${oxanium.variable}`}>
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,24 +1,31 @@
+"use client";
+
 import Image from "next/image";
+import { Fragment } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 import styles from "./about.module.css";
 
 export default function AboutPage() {
+  const { content } = useLanguage();
+
   return (
     <div className={styles.page}>
       <section className={styles.panel}>
         <div className={styles.shield}>
-          <h1 className={styles.title}>About</h1>
+          <h1 className={styles.title}>{content.about.title}</h1>
 
           <p className={styles.body}>
-            The Awaited Winter is an original story written by Myat Ma De May
-            Phuu Ngon, based on a short story that received an award in 2022.
-            <br />
-            <br />
-            This website reimagines the original work as an interactive
-            narrative, combining creative writing with web technology.
-            <br />
-            <br />
-            Through this project, I aim to explore new ways of storytelling and
-            to present my work in a more immersive form.
+            {content.about.paragraphs.map((paragraph, index) => (
+              <Fragment key={`${paragraph.slice(0, 20)}-${index}`}>
+                {paragraph}
+                {index < content.about.paragraphs.length - 1 ? (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                ) : null}
+              </Fragment>
+            ))}
           </p>
           <Image
             src="/images/home/Logo.png"

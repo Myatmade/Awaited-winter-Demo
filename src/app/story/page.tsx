@@ -1,29 +1,25 @@
+"use client";
+
+import { Fragment } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 import styles from "./story.module.css";
 
 export default function StoryPage() {
+  const { content } = useLanguage();
+
   return (
     <div className={styles.page}>
       <section className={styles.panel}>
         <div className={styles.shield}>
-          <h1 className={styles.title}>Story</h1>
+          <h1 className={styles.title}>{content.story.title}</h1>
 
           <p className={styles.synopsis}>
-            Winter returns to the same town every year.
-            <br />
-            Some memories fade with time.
-            <br />
-            Others remain — quietly waiting beneath the surface.
-            <br />
-            <br />
-            A forgotten promise.
-            <br />
-            A name that lingers.
-            <br />
-            A night that was never meant to end the way it did.
-            <br />
-            <br />
-            The Awaited Winter is a story about separation, time, and the
-            fragile hope that certain encounters are not meant to be final.
+            {content.story.synopsisLines.map((line, index) => (
+              <Fragment key={`${line.slice(0, 16)}-${index}`}>
+                {line}
+                {index < content.story.synopsisLines.length - 1 ? <br /> : null}
+              </Fragment>
+            ))}
           </p>
         </div>
       </section>

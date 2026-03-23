@@ -14,15 +14,10 @@
 .shield {
   width: min(720px, 100%);
   margin: 0 auto;
-
   background: rgba(255, 255, 255, 0.35);
-
   border-radius: 14px;
-
   padding: 34px 26px 28px;
   text-align: center;
-
-  /* simple “shield-ish” vibe without SVG */
   clip-path: polygon(6% 10%, 50% 0%, 94% 10%, 94% 90%, 50% 100%, 6% 90%);
 }
 
@@ -49,4 +44,96 @@
   text-align: center;
   font-size: 14px;
   opacity: 0.85;
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .page {
+    padding: 36px 0;
+  }
+
+  .panel {
+    width: min(900px, calc(100% - 40px));
+  }
+
+  .shield {
+    width: min(620px, 100%);
+    padding: 30px 24px 24px;
+    clip-path: polygon(7% 10%, 50% 0%, 93% 10%, 93% 90%, 50% 100%, 7% 90%);
+  }
+
+  .title {
+    font-size: 46px;
+    margin-bottom: 12px;
+    text-underline-offset: 8px;
+  }
+
+  .synopsis {
+    max-width: 500px;
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+}
+
+/* mobile */
+@media (max-width: 767px) {
+  .page {
+    padding: 28px 0;
+  }
+
+  .panel {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .shield {
+    width: min(96vw, 560px);
+    padding: 28px 28px 42px;
+    border-radius: 12px;
+
+    /* give more usable space inside */
+    clip-path: polygon(6% 8%, 50% 0%, 94% 8%, 94% 92%, 50% 100%, 6% 92%);
+  }
+
+  .title {
+    font-size: 38px;
+    margin-bottom: 12px;
+    text-underline-offset: 7px;
+  }
+
+  .synopsis {
+    max-width: 100%;
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+}
+
+/* small mobile */
+@media (max-width: 480px) {
+  .page {
+    padding: 22px 0;
+  }
+
+  .panel {
+    width: calc(100% - 12px);
+  }
+
+  .shield {
+    width: 100%;
+    padding: 24px 24px 38px;
+    border-radius: 10px;
+
+    /* less aggressive shape so text doesn't get cut */
+    clip-path: polygon(5% 7%, 50% 0%, 95% 7%, 95% 93%, 50% 100%, 5% 93%);
+  }
+
+  .title {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-underline-offset: 6px;
+  }
+
+  .synopsis {
+    font-size: 13.5px;
+    line-height: 1.8;
+  }
 }

@@ -1,7 +1,10 @@
 .footer {
   height: 56px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  white-space: nowrap;
 
   background: #071c3f;
   color: #cfe3ff;
@@ -9,4 +12,33 @@
 
   font-size: 18px;
   letter-spacing: 0.2px;
+}
+
+.footerLine {
+  display: inline;
+}
+
+.footerLine + .footerLine {
+  margin-left: 0.35ch;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    min-height: 64px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 15px;
+    line-height: 1.45;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .footerLine {
+    display: block;
+  }
+
+  .footerLine + .footerLine {
+    margin-left: 0;
+  }
 }

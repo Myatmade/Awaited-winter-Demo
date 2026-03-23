@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
 import styles from "./demo.module.css";
 
 type CharacterId = "valentina" | "noah" | "alice";
@@ -632,7 +634,16 @@ const branchA: Step[] = [
     line: {
       narration: true,
       hide: ["noah", "alice"],
-      text: "The lights around me begin to smear into streaks of red and gold. The choir’s singing fades — not because it stopped, but because I can’t hear it anymore.",
+      text: "The lights around me begin to smear into streaks of red and gold.",
+    },
+  },
+  {
+    type: "line",
+    id: "a10",
+    line: {
+      narration: true,
+      hide: ["noah", "alice"],
+      text: "The choir’s singing fades — not because it stopped, but because I can’t hear it anymore.",
     },
   },
 ];
@@ -1102,8 +1113,10 @@ const mergedSteps: Step[] = [
 ];
 
 export default function DemoPage() {
+  const { content } = useLanguage();
   const [branch, setBranch] = useState<"A" | "B" | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const [currentBg, setCurrentBg] = useState<BgId>("god");
   const [currentMusic, setCurrentMusic] = useState<MusicId>("none");
@@ -1157,6 +1170,14 @@ export default function DemoPage() {
   const currentStep = steps[stepIndex];
   const isChoice = currentStep?.type === "choice";
   const currentLine = currentStep?.type === "line" ? currentStep.line : null;
+  const isAtEnding = hasStarted && !isChoice && stepIndex >= steps.length - 1;
+
+  const displayedChoicePrompt =
+    currentStep?.type === "choice" && currentStep.id === "choice-main"
+      ? content.demo.choicePrompt
+      : currentStep?.type === "choice"
+        ? currentStep.prompt
+        : "";
 
   useEffect(() => {
     if (!currentLine) return;
@@ -1219,6 +1240,29 @@ export default function DemoPage() {
   const restart = () => {
     setBranch(null);
     setStepIndex(0);
+    setHasStarted(false);
+    setHasInteracted(false);
+    setSlots(DEFAULT_SLOTS);
+    setCurrentBg("god");
+    setCurrentMusic("none");
+    setVisibleCharacters({
+      valentina: false,
+      noah: false,
+      alice: false,
+    });
+    setPoses(DEFAULT_POSES);
+  };
+
+  const startDemo = () => {
+    setHasStarted(true);
+    setHasInteracted(true);
+  };
+
+  const replayDemo = () => {
+    setBranch(null);
+    setStepIndex(0);
+    setHasStarted(true);
+    setHasInteracted(true);
     setSlots(DEFAULT_SLOTS);
     setCurrentBg("god");
     setCurrentMusic("none");
@@ -1238,6 +1282,7 @@ export default function DemoPage() {
           backgroundImage: `linear-gradient(to top, rgba(7,10,18,0.84), rgba(7,10,18,0.28)), url("${BACKGROUNDS[currentBg]}")`,
         }}
         onClick={() => {
+          if (!hasStarted || isAtEnding) return;
           if (!hasInteracted) setHasInteracted(true);
           if (!isChoice) goNext();
         }}
@@ -1245,7 +1290,7 @@ export default function DemoPage() {
         <div className={styles.topBar} onClick={(e) => e.stopPropagation()}>
           <div className={styles.topControls}>
             <button className={styles.ghostButton} onClick={restart}>
-              Restart
+              {content.demo.restart}
             </button>
           </div>
         </div>
@@ -1278,15 +1323,54 @@ export default function DemoPage() {
             );
           })}
         </section>
+
+        {!hasStarted && (
+          <div
+            className={styles.screenOverlay}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.screenCard}>
+              <p className={styles.screenKicker}>{content.demo.kicker}</p>
+              <h1 className={styles.screenTitle}>
+                {content.demo.welcomeTitle}
+              </h1>
+              <p className={styles.screenBody}>{content.demo.welcomeBody}</p>
+              <button className={styles.startButton} onClick={startDemo}>
+                {content.demo.beginStory}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {isAtEnding && (
+          <div
+            className={styles.screenOverlay}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.screenCard}>
+              <p className={styles.screenKicker}>{content.demo.endKicker}</p>
+              <h2 className={styles.screenTitle}>{content.demo.endTitle}</h2>
+              <p className={styles.screenBody}>{content.demo.endBody}</p>
+              <div className={styles.endActions}>
+                <button className={styles.startButton} onClick={replayDemo}>
+                  {content.demo.playAgain}
+                </button>
+                <Link href="/" className={styles.homeButton}>
+                  {content.demo.backToHome}
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <section
         className={styles.dialogueArea}
         onClick={(e) => e.stopPropagation()}
       >
-        {isChoice ? (
+        {!hasStarted || isAtEnding ? null : isChoice ? (
           <div className={styles.choicePanel}>
-            <p className={styles.choicePrompt}>{currentStep.prompt}</p>
+            <p className={styles.choicePrompt}>{displayedChoicePrompt}</p>
             <div className={styles.choiceButtons}>
               {currentStep.options.map((option) => (
                 <button
@@ -1294,20 +1378,24 @@ export default function DemoPage() {
                   className={styles.choiceButton}
                   onClick={() => chooseBranch(option.branch)}
                 >
-                  {option.label}
+                  {currentStep.id === "choice-main"
+                    ? option.branch === "A"
+                      ? content.demo.choiceA
+                      : content.demo.choiceB
+                    : option.label}
                 </button>
               ))}
             </div>
           </div>
         ) : currentLine ? (
           <div className={styles.dialogueBox}>
-            {!currentLine.narration && (
-              <div className={styles.dialogueHeader}>
-                <span className={styles.speaker}>
-                  {currentLine.speaker ?? ""}
-                </span>
-              </div>
-            )}
+            <div className={styles.dialogueHeader}>
+              <span className={styles.speaker}>
+                {currentLine.narration
+                  ? "\u00A0"
+                  : (currentLine.speaker ?? "\u00A0")}
+              </span>
+            </div>
 
             <p
               className={`${styles.dialogueText} ${
@@ -1323,14 +1411,16 @@ export default function DemoPage() {
                 onClick={goBack}
                 disabled={stepIndex === 0}
               >
-                Back
+                {content.demo.back}
               </button>
               <button
                 className={styles.nextButton}
                 onClick={goNext}
                 disabled={stepIndex >= steps.length - 1}
               >
-                {stepIndex >= steps.length - 1 ? "End" : "Next"}
+                {stepIndex >= steps.length - 1
+                  ? content.demo.end
+                  : content.demo.next}
               </button>
             </div>
           </div>

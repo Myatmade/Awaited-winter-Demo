@@ -1,4 +1,4 @@
-.page {
+.creditsPage {
   min-height: calc(100dvh - 126px);
   padding: 40px 0;
   display: flex;
@@ -6,22 +6,22 @@
   justify-content: center;
 }
 
-.panel {
+.creditsPanel {
   width: min(980px, calc(100% - 48px));
   margin: 0 auto;
 }
 
-.shield {
-  width: min(760px, 100%);
+.creditsCard {
+  width: min(720px, 100%);
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.35);
   border-radius: 14px;
-  padding: 34px 28px 28px;
+  padding: 34px 26px 60px;
   text-align: center;
   clip-path: polygon(6% 10%, 50% 0%, 94% 10%, 94% 90%, 50% 100%, 6% 90%);
 }
 
-.title {
+.creditsTitle {
   font-family: var(--font-macondo), serif;
   font-size: 54px;
   font-weight: 800;
@@ -31,120 +31,105 @@
   text-underline-offset: 10px;
 }
 
-.body {
+.creditsText {
   font-size: 16.5px;
-  line-height: 1.85;
+  line-height: 1.8;
   color: #071c3f;
-  max-width: 620px;
+  max-width: 560px;
   margin: 0 auto;
 }
 
-.bottomLogo {
-  display: block;
-  width: min(420px, 90%);
-  height: auto;
-  margin: 24px auto 0;
+.creditsFooter {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.85;
 }
 
 /* tablet */
 @media (max-width: 1024px) {
-  .page {
+  .creditsPage {
     padding: 36px 0;
   }
 
-  .panel {
+  .creditsPanel {
     width: min(900px, calc(100% - 40px));
   }
 
-  .shield {
-    width: min(660px, 100%);
-    padding: 30px 24px 24px;
+  .creditsCard {
+    width: min(620px, 100%);
+    padding: 30px 24px 50px;
     clip-path: polygon(7% 10%, 50% 0%, 93% 10%, 93% 90%, 50% 100%, 7% 90%);
   }
 
-  .title {
+  .creditsTitle {
     font-size: 46px;
     margin-bottom: 12px;
     text-underline-offset: 8px;
   }
 
-  .body {
-    max-width: 540px;
+  .creditsText {
+    max-width: 500px;
     font-size: 15.5px;
-    line-height: 1.78;
-  }
-
-  .bottomLogo {
-    width: min(360px, 88%);
-    margin-top: 22px;
+    line-height: 1.75;
   }
 }
 
 /* mobile */
 @media (max-width: 767px) {
-  .page {
+  .creditsPage {
     padding: 28px 0;
   }
 
-  .panel {
+  .creditsPanel {
     width: min(100%, calc(100% - 28px));
   }
 
-  .shield {
+  .creditsCard {
     width: min(90vw, 520px);
     padding: 28px 30px 42px;
     border-radius: 12px;
     clip-path: polygon(6% 8%, 50% 0%, 94% 8%, 94% 92%, 50% 100%, 6% 92%);
   }
 
-  .title {
+  .creditsTitle {
     font-size: 38px;
     margin-bottom: 12px;
     text-underline-offset: 7px;
   }
 
-  .body {
+  .creditsText {
     max-width: 100%;
     font-size: 14.5px;
     line-height: 1.8;
-  }
-
-  .bottomLogo {
-    width: min(300px, 84%);
-    margin-top: 20px;
   }
 }
 
 /* small mobile */
 @media (max-width: 480px) {
-  .page {
+  .creditsPage {
     padding: 22px 0;
   }
 
-  .panel {
+  .creditsPanel {
     width: calc(100% - 18px);
   }
 
-  .shield {
+  .creditsCard {
     width: min(88vw, 400px);
     padding: 24px 28px 38px;
     border-radius: 10px;
     clip-path: polygon(5% 7%, 50% 0%, 95% 7%, 95% 93%, 50% 100%, 5% 93%);
   }
 
-  .title {
+  .creditsTitle {
     font-size: 32px;
     margin-bottom: 10px;
     text-underline-offset: 6px;
   }
 
-  .body {
+  .creditsText {
     font-size: 13.5px;
     line-height: 1.75;
-  }
-
-  .bottomLogo {
-    width: min(240px, 82%);
-    margin-top: 18px;
   }
 }
