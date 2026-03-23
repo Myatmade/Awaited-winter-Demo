@@ -103,7 +103,7 @@ export default function Header() {
               className={`${styles.langButton} ${language === "jp" ? styles.langActive : ""}`}
               onClick={() => setLanguage("jp")}
             >
-              JP
+              日本
             </button>
           </div>
         </nav>
